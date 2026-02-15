@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const { $client } = useNuxtApp()
 
-// 모니터링할 사이드베이스 레포지토리 목록
 const repoList = ['sidebase', 'nuxt-auth', 'nuxt-session', 'nuxt-parse']
 
-// tRPC를 사용하여 데이터 로드
 const { data: results, pending, error } = await useAsyncData('repo-stats', async () => {
   return await Promise.all(
     repoList.map(name => $client.github.getStats.query(name))
@@ -30,7 +28,7 @@ const { data: results, pending, error } = await useAsyncData('repo-stats', async
 
       <div v-if="error" class="text-red-400 bg-red-900/20 p-4 rounded-lg">
         <p class="font-bold">
-          데이터를 불러오는 중 오류가 발생했습니다.
+          Error occurred while loading data
         </p>
         <pre class="text-xs mt-2 text-left bg-black p-2 rounded">{{ error }}</pre>
       </div>
