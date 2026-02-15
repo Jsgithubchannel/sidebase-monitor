@@ -1,60 +1,54 @@
-# sidebase-monitor-app
+# Sidebase Ecosystem Monitor 📊
 
-This is a [sidebase](https://sidebase.io/) app created by running `npm create sidebase@latest`. This project uses the following technologies for a great developer- and user-experience:
-- [TypeScript](https://www.typescriptlang.org/)
-- [Nuxt 3](https://nuxt.com)
-- Tailwind CSS
-- Naive UI
-- Prisma ORM
-- tRPC
-- nuxt-auth
-- i18n
-- Linting via ESLint and @antfu/eslint-config
+![Nuxt 3](https://img.shields.io/badge/Nuxt_3-00DC82?style=for-the-badge&logo=nuxt.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![tRPC](https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 
-## How to get going?
+A full-stack dashboard designed to monitor the status of the **Sidebase** open-source ecosystem in real-time. 
 
-This is a straight-forward setup with minimal templating and scaffolding. The options you selected during the sidebase CLI setup are all here though. Good places to continue reading are:
-- [the First Steps documentation](https://sidebase.io/sidebase/usage)
-- [our discord](https://discord.gg/auc8eCeGzx)
+This project was built to demonstrate **End-to-End Type Safety** and **Runtime Data Validation** by leveraging the specific tools and architecture patterns provided by the Sidebase stack.
 
-Some tasks you should probably do in the beginning are:
-- [ ] replace this generic README with a more specific one
-- [ ] install the Vue Volar extension
-- [ ] enable [Volar takeover mode](https://nuxt.com/docs/getting-started/installation#prerequisites) to ensure a smooth editor setup
-- [ ] [install Nuxt 3 devtools](https://github.com/nuxt/devtools#installation) if you want to use them
-- [ ] Prisma: Edit your `prisma/prisma.schema` to your liking
-- [ ] Prisma: Start your local postgres database using `npm run db`
-- [ ] Prisma: Run `npx prisma db push` to sync the schema to your database & generate the Prisma Client
-- [ ] Prisma: Add `**/*/pglite-data` and `pgliteHealthz` to your `.gitignore` file
-- [ ] Auth: Configure your auth providers to the [NuxtAuthHandler](./server/api/auth/[...].ts)
-- [ ] Auth, optional: Enable global protection by setting `enableGlobalAppMiddleware: true` in [your nuxt.config.ts](./nuxt.config.ts). Delete the local middleware in the [protected.vue](./pages/protected.vue) page if you do
+---
 
-### Setup
+## 🚀 Key Features
 
-Make sure to install the dependencies:
+- **Real-time GitHub Statistics**: Fetches and displays Stars, Descriptions, and Repository metadata for core Sidebase projects (`sidebase`, `nuxt-auth`, `nuxt-parse`, etc.).
+- **End-to-End Type Safety**: Achieved via **tRPC**. The types defined on the server are automatically inferred on the client, eliminating the need for manual type declarations or API documentation.
+- **Runtime Data Validation**: Utilizes **Zod** and **@sidebase/nuxt-parse** to strictly validate external API responses, ensuring application stability against unexpected API changes.
+- **Modern UI/UX**: Responsive, dark-mode prioritized interface built with **Tailwind CSS**.
 
-```bash
-npm install
-```
+---
 
-### Development Server
+## 🛠️ Tech Stack & Architecture
 
-Start the development server on http://localhost:3000
+This project is not just a dashboard; it is an implementation of a robust full-stack architecture.
 
-```bash
-npm run dev
-```
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | **Nuxt 3** | Full-stack Vue framework (SSR/CSR). |
+| **Language** | **TypeScript** | Strict static typing throughout the codebase. |
+| **API Layer** | **tRPC** | Replaces REST/GraphQL to provide direct server function calls with type inference. |
+| **Validation** | **Zod** & **Nuxt-Parse** | Schema definition and runtime validation for external data (`parseDataAs`). |
+| **Database** | **SQLite** & **Prisma** | Lightweight relational database with ORM for type-safe queries. |
+| **Styling** | **Tailwind CSS** | Utility-first CSS framework for rapid UI development. |
 
-### Production
+---
 
-Build the application for production:
+## 🧩 Architectural Highlights (Why I built this)
 
-```bash
-npm run build
-```
+### 1. Defensive Programming with `nuxt-parse`
+External APIs (like GitHub) can change or return unexpected data. To prevent this from breaking the frontend, I implemented a strict validation layer on the server.
 
-Locally preview production build:
+```typescript
+// server/trpc/routers/github.ts
+const GitHubRepoSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  stargazers_count: z.number(),
+  // ...
+})
 
-```bash
-npm run preview
-```
+// The app will throw a clear error if GitHub returns data that doesn't match this schema.
+return await parseDataAs(data, GitHubRepoSchema)
