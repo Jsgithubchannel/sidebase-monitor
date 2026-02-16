@@ -6,6 +6,9 @@
 ![Zod](https://img.shields.io/badge/Zod-3068B7?style=for-the-badge&logo=zod&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
+<img width="1259" height="426" alt="Screenshot 2026-02-16 at 11 52 50 PM" src="https://github.com/user-attachments/assets/222c1e35-c834-4ada-a35d-60e1cdcd9b7f" />
+
+
 ## 🧐 Motivation
 
 While researching **sidestream** and their contributions to the open-source community, I discovered the **Sidebase (Cheviot)** ecosystem. I was particularly intrigued by their philosophy of **"End-to-End Type Safety"**—the ability to share types seamlessly between the server and client without the overhead of manual API documentation.
