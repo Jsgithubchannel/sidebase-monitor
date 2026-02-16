@@ -32,7 +32,6 @@ I selected this stack to maximize type safety and development velocity.
 | **Framework** | **Nuxt 3** | To manage both server and client in a single codebase with SSR capabilities. |
 | **API Layer** | **tRPC** | To eliminate the overhead of REST API documentation and manual type synchronization. |
 | **Validation** | **Zod** & **Nuxt-Parse** | To enforce strict schema validation on external data at runtime. |
-| **Database** | **SQLite** & **Prisma** | For a lightweight, zero-config relational database setup with type-safe ORM. |
 | **Styling** | **Tailwind CSS** | For rapid UI prototyping and responsive design. |
 
 ---
