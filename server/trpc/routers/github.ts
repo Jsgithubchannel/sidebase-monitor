@@ -30,7 +30,6 @@ export const githubRouter = router({
         return await parseDataAs(data, GitHubRepoSchema)
       }
       catch (error) {
-        // 3. 여기서 진짜 범인이 잡힙니다!
         console.error(`[Server Error] Failed to fetch ${input}:`, error)
         throw error
       }
